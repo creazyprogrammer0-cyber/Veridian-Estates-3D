@@ -1,0 +1,550 @@
+{
+  "entities": {
+    "AdminRole": {
+      "title": "Administrator Role Assignment",
+      "description": "Defines authorized administrative users and their RBAC role.",
+      "type": "object",
+      "properties": {
+        "uid": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$",
+          "description": "Firebase Auth UID of the administrator."
+        },
+        "email": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 254,
+          "description": "Verified email address of the administrator."
+        },
+        "role": {
+          "type": "string",
+          "enum": ["super_admin", "content_manager", "inquiry_manager"],
+          "maxLength": 32,
+          "description": "Assigned role governing operational permissions."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Server timestamp of role creation."
+        }
+      },
+      "required": ["uid", "email", "role", "createdAt"]
+    },
+    "Project": {
+      "title": "Real Estate Development Project",
+      "description": "A residential or mixed-use real estate development project.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "slug": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-z0-9\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 160
+        },
+        "location": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 200
+        },
+        "category": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "shortDescription": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "fullDescription": {
+          "type": "string",
+          "maxLength": 3000
+        },
+        "completionStatus": {
+          "type": "string",
+          "enum": ["Completed", "Under Construction", "Planning", "Unconfirmed"],
+          "maxLength": 40
+        },
+        "publicationStatus": {
+          "type": "string",
+          "enum": ["draft", "published", "archived"],
+          "maxLength": 32
+        },
+        "isDemonstration": {
+          "type": "boolean"
+        },
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "slug",
+        "name",
+        "location",
+        "category",
+        "shortDescription",
+        "completionStatus",
+        "publicationStatus",
+        "isDemonstration",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Building": {
+      "title": "Project Building",
+      "description": "An individual architectural building belonging to a parent Project.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "projectId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "name": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 160
+        },
+        "code": {
+          "type": "string",
+          "maxLength": 32
+        },
+        "overview": {
+          "type": "string",
+          "maxLength": 1500
+        },
+        "confirmedFloors": {
+          "type": "number"
+        },
+        "publicationStatus": {
+          "type": "string",
+          "enum": ["draft", "published", "archived"],
+          "maxLength": 32
+        },
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "projectId",
+        "name",
+        "code",
+        "overview",
+        "confirmedFloors",
+        "publicationStatus",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Floor": {
+      "title": "Building Floor Level",
+      "description": "A floor level within a building.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "projectId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "buildingId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "floorNumber": {
+          "type": "number"
+        },
+        "label": {
+          "type": "string",
+          "maxLength": 80
+        },
+        "publicationStatus": {
+          "type": "string",
+          "enum": ["draft", "published", "archived"],
+          "maxLength": 32
+        },
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "projectId",
+        "buildingId",
+        "floorNumber",
+        "label",
+        "publicationStatus",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Apartment": {
+      "title": "Residential Apartment Unit",
+      "description": "An individual residential unit located on a specific floor and building.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "projectId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "buildingId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "floorId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "unitCode": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "title": {
+          "type": "string",
+          "maxLength": 160
+        },
+        "bedrooms": {
+          "type": "number"
+        },
+        "bathrooms": {
+          "type": "number"
+        },
+        "areaSqm": {
+          "type": "number"
+        },
+        "areaConvention": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "priceStatus": {
+          "type": "string",
+          "enum": ["published", "price_on_request", "unconfirmed"],
+          "maxLength": 32
+        },
+        "priceAmount": {
+          "type": "number"
+        },
+        "availabilityStatus": {
+          "type": "string",
+          "enum": ["available", "reserved", "sold", "unavailable"],
+          "maxLength": 32
+        },
+        "publicationStatus": {
+          "type": "string",
+          "enum": ["draft", "published", "archived"],
+          "maxLength": 32
+        },
+        "tourAssetId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "isDemonstration": {
+          "type": "boolean"
+        },
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "projectId",
+        "buildingId",
+        "floorId",
+        "unitCode",
+        "title",
+        "bedrooms",
+        "bathrooms",
+        "areaSqm",
+        "areaConvention",
+        "priceStatus",
+        "priceAmount",
+        "availabilityStatus",
+        "publicationStatus",
+        "tourAssetId",
+        "isDemonstration",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "TourManifest": {
+      "title": "3D Virtual Tour Asset Manifest",
+      "description": "Metadata, capture status, and provider reference for a 3D property experience.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "projectId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "buildingId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "floorId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "apartmentId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "provider": {
+          "type": "string",
+          "enum": ["threejs_architectural_twin", "matterport_embed", "custom_webgl"],
+          "maxLength": 48
+        },
+        "captureStatus": {
+          "type": "string",
+          "enum": [
+            "not_captured",
+            "capture_scheduled",
+            "processing",
+            "ready_for_review",
+            "approved_for_publication",
+            "published",
+            "unavailable"
+          ],
+          "maxLength": 48
+        },
+        "externalEmbedUrl": {
+          "type": "string",
+          "maxLength": 500
+        },
+        "ownerId": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "projectId",
+        "buildingId",
+        "floorId",
+        "apartmentId",
+        "provider",
+        "captureStatus",
+        "externalEmbedUrl",
+        "ownerId",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "Inquiry": {
+      "title": "Customer Inquiry and Site Visit Request",
+      "description": "Contains customer PII and inquiry details. Strictly isolated to authorized admins and the submitting user.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "maxLength": 128,
+          "pattern": "^[a-zA-Z0-9_\\-]+$"
+        },
+        "customerName": {
+          "type": "string",
+          "minLength": 2,
+          "maxLength": 120
+        },
+        "customerEmail": {
+          "type": "string",
+          "format": "email",
+          "maxLength": 254
+        },
+        "customerPhone": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "preferredContactMethod": {
+          "type": "string",
+          "enum": ["email", "phone", "either"],
+          "maxLength": 24
+        },
+        "inquiryType": {
+          "type": "string",
+          "enum": ["general_inquiry", "property_details", "site_visit_request"],
+          "maxLength": 40
+        },
+        "projectId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "apartmentId": {
+          "type": "string",
+          "maxLength": 128
+        },
+        "preferredDate": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "preferredTimeWindow": {
+          "type": "string",
+          "maxLength": 64
+        },
+        "message": {
+          "type": "string",
+          "minLength": 5,
+          "maxLength": 2000
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "new",
+            "contacted",
+            "follow_up_required",
+            "site_visit_requested",
+            "site_visit_confirmed",
+            "closed"
+          ],
+          "maxLength": 40
+        },
+        "internalNotes": {
+          "type": "string",
+          "maxLength": 2000
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "customerName",
+        "customerEmail",
+        "customerPhone",
+        "preferredContactMethod",
+        "inquiryType",
+        "projectId",
+        "apartmentId",
+        "preferredDate",
+        "preferredTimeWindow",
+        "message",
+        "status",
+        "internalNotes",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "firestore": {
+    "/admins/{adminUid}": {
+      "schema": { "$ref": "#/entities/AdminRole" },
+      "description": "Stores administrator UIDs and RBAC roles."
+    },
+    "/projects/{projectId}": {
+      "schema": { "$ref": "#/entities/Project" },
+      "description": "Stores real estate projects."
+    },
+    "/buildings/{buildingId}": {
+      "schema": { "$ref": "#/entities/Building" },
+      "description": "Stores buildings associated with projects."
+    },
+    "/floors/{floorId}": {
+      "schema": { "$ref": "#/entities/Floor" },
+      "description": "Stores floors associated with buildings."
+    },
+    "/apartments/{apartmentId}": {
+      "schema": { "$ref": "#/entities/Apartment" },
+      "description": "Stores individual residential apartments."
+    },
+    "/tourManifests/{manifestId}": {
+      "schema": { "$ref": "#/entities/TourManifest" },
+      "description": "Stores 3D virtual tour manifests and approval states."
+    },
+    "/inquiries/{inquiryId}": {
+      "schema": { "$ref": "#/entities/Inquiry" },
+      "description": "Stores customer inquiries and site visit requests containing PII."
+    }
+  }
+}

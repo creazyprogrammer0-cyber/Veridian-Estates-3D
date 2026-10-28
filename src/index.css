@@ -1,0 +1,118 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    /* Typography System: Cormorant Garamond (Display) + Manrope (Body/UI) + IBM Plex Mono (Tabular Metrics) */
+    --font-display: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    --font-sans: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+    --font-mono: 'IBM Plex Mono', monospace;
+
+    /* Contemporary Luxury Real Estate Strict Color System */
+    --color-white: #FFFFFF;
+    --color-near-black: #17191D;
+    --color-cobalt: #2855E8;
+    --color-cobalt-hover: #1E44C4;
+    --color-cool-grey: #E9EDF4;
+    --color-cool-grey-subtle: #F4F6FA;
+    --color-text-muted: #525866;
+    --color-text-on-dark-muted: #9BA3B4;
+
+    /* Cinematic Motion & Easing Tokens */
+    --ease-luxury: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html {
+    font-family: var(--font-sans);
+    background-color: var(--color-white);
+    color: var(--color-near-black);
+    scroll-behavior: smooth;
+  }
+
+  body {
+    margin: 0;
+    background-color: var(--color-white);
+    color: var(--color-near-black);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, .font-display {
+    font-family: var(--font-display);
+    text-wrap: balance;
+  }
+
+  .font-mono, .tabular-nums {
+    font-family: var(--font-mono);
+    font-variant-numeric: tabular-nums;
+  }
+
+  /* Accessible Focus States in Cobalt Blue */
+  button:focus-visible,
+  a:focus-visible,
+  input:focus-visible,
+  select:focus-visible,
+  textarea:focus-visible {
+    outline: 2px solid var(--color-cobalt);
+    outline-offset: 2px;
+  }
+}
+
+/* Editorial Dropcap in Cobalt Blue */
+.editorial-dropcap::first-letter {
+  font-family: var(--font-display);
+  font-size: 3.35rem;
+  font-weight: 600;
+  line-height: 0.85;
+  float: left;
+  margin-right: 0.75rem;
+  margin-top: 0.15rem;
+  color: var(--color-cobalt);
+}
+
+/* Cinematic Image & Section Transitions */
+.arch-image-zoom {
+  transition: transform 650ms var(--ease-luxury);
+}
+
+.group:hover .arch-image-zoom {
+  transform: scale(1.03);
+}
+
+.arch-transition {
+  transition: transform 200ms var(--ease-luxury),
+              opacity 200ms var(--ease-luxury),
+              background-color 200ms var(--ease-luxury),
+              border-color 200ms var(--ease-luxury),
+              color 200ms var(--ease-luxury),
+              box-shadow 200ms var(--ease-luxury);
+}
+
+@keyframes luxuryFadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.arch-reveal {
+  animation: luxuryFadeUp 480ms var(--ease-luxury) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+  .group:hover .arch-image-zoom {
+    transform: none !important;
+  }
+  .arch-reveal {
+    animation: none !important;
+  }
+}

@@ -1,0 +1,10 @@
+User-agent: *
+Allow: /
+Allow: /projects
+Allow: /apartments
+Allow: /tour
+Allow: /about
+Allow: /contact
+Disallow: /admin
+
+Sitemap: /sitemap.xml

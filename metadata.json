@@ -1,0 +1,6 @@
+{
+  "name": "Veridian Estates — Architectural Residences & 3D Digital Showroom",
+  "description": "A production-oriented real estate development platform featuring multi-project property discovery, building and floor exploration, interactive 3D virtual property tours, and authenticated content and inquiry administration.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
